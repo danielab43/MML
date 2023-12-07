@@ -1,0 +1,65 @@
+{%  extends "base.html" %}
+
+{% block content %}
+    <div class="container text-center profile">
+        <img src="{{ user.avatar(128) }}" alt="Profile Picture">
+        <h1 class="profile"> {{ user.username }}</h1>
+        <h2>Liked Songs</h2>
+    </div>
+    {% if songs %}
+    <div class="table-responsive">
+            <table class="table table-dark ">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Artists</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for song in songs %}
+                        <tr>
+                            <td>{{ song.Title }}</td>
+                            <td>{{ song.Genre }}</td>
+                            <td>{{ song.Year }}</td>
+                            <td>
+                                {% for artist in song.Artists %}
+                                {{ artist.Name }}
+                                {% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <div class="container text-center">
+        <ul class="pagination d-flex justify-content-center">
+            {%  if songs.has_prev %}
+            <li class="page-item">
+                <a class="page-link prevnext" href="?page={{ songs.prev_num }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">{{ songs.page }} of {{ songs.pages }}</span>
+            </li>
+            {% if songs.has_next %}
+            <li class="page-item">
+                <a class="page-link prevnext" href="?page={{ songs.next_num }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="container text-center">
+        <p>No liked songs to display.</p>
+    </div>
+    {% endif %}
+
+
+{% endblock %}

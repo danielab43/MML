@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container text-center">
+        <ul class="pagination d-flex justify-content-center">
+            {%  if songs.has_prev %}
+            <li class="page-item">
+                <a class="page-link prevnext" href="?page={{ songs.prev_num }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">{{ songs.page }} of {{ songs.pages }}</span>
+            </li>
+            {% if songs.has_next %}
+            <li class="page-item">
+                <a class="page-link prevnext" href="?page={{ songs.next_num }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="table-responsive">
+    <table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col"><a class="tbhead" href="/order/Title?order_title={{ title_order }}">Title
+            {% if title_order == 'desc' %}
+                <b class="symbol fa-angle-up"></b>
+            {% elif title_order == "asc" %}
+            {% else %}
+                <b class="symbol fa-angle-down"></b>
+            {%  endif %}
+            </a></th>
+        <th scope="col"><a class="tbhead" href="/order/Genre?order_genre={{ genre_order }}">Genre
+            {% if genre_order == 'desc' %}
+                <b class="symbol fa-angle-up"></b>
+            {% elif genre_order == "asc" %}
+            {% else %}
+                <b class="symbol fa-angle-down"></b>
+            {%  endif %}
+        </a></th>
+        <th scope="col"><a class="tbhead" href="/order/Year?order_year={{ year_order }}">Year
+            {% if year_order == 'desc' %}
+                <b class="symbol fa-angle-up"></b>
+            {% elif year_order == "asc" %}
+            {% else %}
+                <b class="symbol fa-angle-down"></b>
+            {%  endif %}
+        </a></th>
+        <th scope="col">Artists</th>
+        <th scope="col"><a class="tbhead" href="/order/Upvotes?order_upvotes={{ upvotes_order }}">Likes
+            {% if upvotes_order == 'desc' %}
+                <b class="symbol fa-angle-up"></b>
+            {% elif upvotes_order == "asc" %}
+            {% else %}
+                <b class="symbol fa-angle-down"></b>
+            {%  endif %}
+        </a></th>
+        <th scope="col"><a class="tbhead" href="/order/Downvotes?order_downvotes={{ downvotes_order }}">Dislikes
+            {% if downvotes_order == 'desc' %}
+                <b class="symbol fa-angle-up"></b>
+            {% elif downvotes_order == "asc" %}
+            {% else %}
+                <b class="symbol fa-angle-down"></b>
+            {%  endif %}
+        </a></th>
+    </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {% for song in songs %}
+    <tr>
+        <td>{{ song.Title }}</td>
+        <td>{{ song.Genre }}</td>
+        <td>{{ song.Year }}</td>
+        <td>
+            {% for artist in song.Artists %}
+            {{ artist.Name }}
+            {% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </td>
+        <td><a class="vote tbhead" id="{{ song.SongID }}">
+            <b class="far fa-thumbs-up" id="up"></b>
+            <span id="sup"> {{ song.Upvotes }}</span></a></td>
+        <td><a class="vote tbhead" id="{{ song.SongID }}">
+            <b class="far fa-thumbs-down" id="down"></b>
+            <span id="sdown"> {{ song.Downvotes }}</span></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+{% endblock %}

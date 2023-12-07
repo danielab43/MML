@@ -1,0 +1,100 @@
+body{
+    background-color: #232b2b;
+    color: white;
+}
+
+.navbar {
+    background-color: #22311d;
+}
+
+.profile{
+    margin-top: 20px;
+}
+
+.table-responsive{
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+
+@media(min-width: 0px){
+    .table-responsive{
+        font-size: 12px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media(min-width: 1000px){
+    .table-responsive{
+        font-size: 18px;
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+}
+
+@font-face{
+    font-family: Roboto;
+    src: url('fontawesome-free-5.3.1-web/webfonts/Roboto-Light.ttf');
+}
+
+body {
+    font-family: Roboto;
+}
+
+th{
+    width: 18%;
+}
+
+.log {
+    margin-top: 50px;
+    font-size: 15px;
+    font-family: Roboto;
+
+}
+
+.logh1 {
+    font-size: 45px;
+    font-family: Roboto;
+}
+
+.d-flex {
+    margin-top: 1rem;
+}
+
+.pagination {
+    --bs-pagination-active-bg: #01ff1d12;
+    --bs-pagination-active-border-color: #22311d;
+    --bs-tertiary-bg: #364f2e;
+    --bs-link-hover-color: white;
+    --bs-border-color: #364f2e;
+}
+
+.prevnext {
+    background-color: #01ff1d12;
+    --bs-pagination-border-color: #22311d;
+}
+
+.page-link {
+    color: white;
+}
+
+.tbhead {
+    text-decoration: none;
+    color: white;
+}
+
+.tbhead:hover {
+    opacity: 75%;
+}
+
+.symbol {
+    font-family: 'Font Awesome 5 Free';
+}
+
+.errormes {
+    color: #ff7800;
+}
+
+.nopad {
+    padding-left: 0;
+}
